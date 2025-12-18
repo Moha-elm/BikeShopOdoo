@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+    <!-- Vue formulaire client étendue avec historique -->
+    <record id="view_partner_form_inherit_rental" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit.rental</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            
+            <!-- Ajouter un smart button pour les locations -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button class="oe_stat_button" type="object" name="action_view_rentals" icon="fa-bicycle">
+                    <field name="rental_count" widget="statinfo" string="Locations"/>
+                </button>
+            </xpath>
+            
+            <!-- Ajouter un onglet avec l'historique des locations -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Locations" name="rentals">
+                    <field name="rental_ids" readonly="1">
+                        <list>
+                            <field name="reference"/>
+                            <field name="bike_id"/>
+                            <field name="start_date"/>
+                            <field name="end_date"/>
+                            <field name="total_price"/>
+                            <field name="state" widget="badge"/>
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+            
+        </field>
+    </record>
+    
+    </data>
+</odoo>

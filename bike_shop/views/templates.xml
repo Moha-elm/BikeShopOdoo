@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        
+        <!-- ========== HOMEPAGE ========== -->
+        <template id="homepage" name="Bike Shop Homepage">
+            <t t-call="website.layout">
+                <!-- Inclure le CSS directement ici -->
+                <t t-set="head">
+                    <link rel="stylesheet" type="text/css" href="/bike_shop/static/src/css/bike_shop.css"/>
+                </t>
+                
+                <div id="wrap" class="oe_structure oe_empty">
+                    
+                    <!-- Hero Section -->
+                    <section class="s_cover pt96 pb96" style="background-color: #1e8449 !important;" data-snippet="s_cover" data-name="Cover">
+                        <div class="container">
+                            <div class="row s_nb_column_fixed">
+                                <div class="col-lg-8 offset-lg-2 pt32 pb32 text-center">
+                                    <h1 class="display-3 text-white">Bike Shop</h1>
+                                    <h2 class="text-white-50">Vente &amp; Location de Vélos</h2>
+                                    <p class="lead text-white mt-3">
+                                        Découvrez notre gamme complète de vélos de qualité. 
+                                        Achetez ou louez le vélo parfait pour vos aventures!
+                                    </p>
+                                    <div class="mt-4">
+                                        <a href="/shop" class="btn btn-primary btn-lg me-2">Voir nos vélos</a>
+                                        <a href="/location" class="btn btn-outline-light btn-lg">Louer un vélo</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Services Section -->
+                    <section class="s_text_block pt48 pb48" data-snippet="s_text_block">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 text-center mb-5">
+                                    <h2 class="display-4">Nos Services</h2>
+                                    <p class="lead text-muted">Deux façons de profiter de nos vélos</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- Vente -->
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card h-100 shadow-sm">
+                                        <div class="card-body text-center p-5">
+                                            <div class="mb-3">
+                                                <i class="fa fa-shopping-cart fa-4x text-primary"/>
+                                            </div>
+                                            <h3 class="card-title">Vente de Vélos</h3>
+                                            <p class="card-text">
+                                                Large choix de vélos neufs : VTT, route, ville, électrique.
+                                                Des marques de qualité pour tous les budgets et tous les usages.
+                                            </p>
+                                            <ul class="list-unstyled text-start">
+                                                <li>✓ Garantie constructeur</li>
+                                                <li>✓ Livraison possible</li>
+                                                <li>✓ Service après-vente</li>
+                                                <li>✓ Accessoires inclus</li>
+                                            </ul>
+                                            <a href="/shop" class="btn btn-primary mt-3">Découvrir la boutique</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Location -->
+                                <div class="col-lg-6 mb-4">
+                                    <div class="card h-100 shadow-sm">
+                                        <div class="card-body text-center p-5">
+                                            <div class="mb-3">
+                                                <i class="fa fa-bicycle fa-4x text-success"/>
+                                            </div>
+                                            <h3 class="card-title">Location de Vélos</h3>
+                                            <p class="card-text">
+                                                Louez un vélo pour une heure, une journée ou un mois.
+                                                Parfait pour tester avant d'acheter ou pour une utilisation ponctuelle.
+                                            </p>
+                                            <ul class="list-unstyled text-start">
+                                                <li>✓ Tarifs horaire/jour/mois</li>
+                                                <li>✓ Vélos entretenus</li>
+                                                <li>✓ Réservation en ligne</li>
+                                                <li>✓ Flexibilité totale</li>
+                                            </ul>
+                                            <a href="/location" class="btn btn-success mt-3">Réserver maintenant</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Top Bikes Section -->
+                    <section class="s_text_block pt48 pb48 bg-light" data-snippet="s_text_block">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 text-center mb-5">
+                                    <h2 class="display-4">Nos Vélos Populaires</h2>
+                                    <p class="lead text-muted">Découvrez nos modèles les plus demandés</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <t t-foreach="top_bikes" t-as="bike">
+                                    <div class="col-lg-4 mb-4">
+                                        <div class="card h-100 shadow-sm">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><t t-esc="bike.name"/></h5>
+                                                <p class="text-muted"><t t-esc="bike.description"/></p>
+                                                <div class="mt-3">
+                                                    <strong class="text-primary fs-4">
+                                                        <t t-esc="bike.list_price" t-options="{'widget': 'monetary', 'display_currency': bike.currency_id}"/>
+                                                    </strong>
+                                                </div>
+                                                <div class="mt-2 text-muted small">
+                                                    <div>Location: <t t-esc="bike.rental_price_hour"/>€/h</div>
+                                                    <div><t t-esc="bike.rental_price_day"/>€/jour</div>
+                                                    <div><t t-esc="bike.rental_price_month"/>€/mois</div>
+                                                </div>
+                                                <div class="mt-3">
+                                                    <a t-attf-href="/shop/product/#{bike.id}" class="btn btn-sm btn-primary me-2">Acheter</a>
+                                                    <a t-attf-href="/location?bike_id=#{bike.id}" class="btn btn-sm btn-outline-success">Louer</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-lg-12 text-center">
+                                    <a href="/shop" class="btn btn-lg btn-primary">Voir tous les vélos</a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </t>
+        </template>
+
+       <!-- ========== PAGE LOCATION ========== -->
+        <template id="location_form" name="Formulaire de Location">
+            <t t-call="website.layout">
+                <t t-set="head">
+                    <link rel="stylesheet" type="text/css" href="/bike_shop/static/src/css/bike_shop.css"/>
+                </t>
+                
+                <div id="wrap" class="oe_structure">
+                    <section class="s_text_block pt48 pb48">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8 offset-lg-2">
+                                    <h1 class="display-4 text-center mb-4">Réserver une Location</h1>
+                                    <p class="lead text-center text-muted mb-5">
+                                        Remplissez le formulaire ci-dessous pour réserver votre vélo
+                                    </p>
+
+                                    <form action="/location/submit" method="post" class="card shadow-sm p-4">
+                                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                                        
+                                        <!-- Informations Client -->
+                                        <h4 class="mb-3">Vos informations</h4>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="customer_name">Nom complet *</label>
+                                            <input type="text" class="form-control" id="customer_name" name="customer_name" required="required"/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="customer_email">Email *</label>
+                                            <input type="email" class="form-control" id="customer_email" name="customer_email" required="required"/>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="customer_phone">Téléphone *</label>
+                                            <input type="tel" class="form-control" id="customer_phone" name="customer_phone" required="required"/>
+                                        </div>
+
+                                        <hr class="my-4"/>
+
+                                        <!-- Détails Location -->
+                                        <h4 class="mb-3">Détails de la location</h4>
+                                        <div class="mb-3">
+                                            <label class="form-label" for="bike_id">Vélo *</label>
+                                            <select class="form-select" id="bike_id" name="bike_id" required="required">
+                                                <option value="">-- Choisissez un vélo --</option>
+                                                <t t-foreach="bikes" t-as="bike">
+                                                    <t t-foreach="bike.product_variant_ids" t-as="variant">
+                                                        <option t-att-value="variant.id">
+                                                            <t t-esc="bike.name"/> - 
+                                                            <t t-esc="bike.list_price" t-options="{'widget': 'monetary', 'display_currency': bike.currency_id}"/>
+                                                            (Location: <t t-esc="bike.rental_price_day"/>€/jour)
+                                                        </option>
+                                                    </t>
+                                                </t>
+                                            </select>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label" for="start_date">Date de début *</label>
+                                                <input type="datetime-local" class="form-control" id="start_date" name="start_date" required="required"/>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label" for="end_date">Date de fin *</label>
+                                                <input type="datetime-local" class="form-control" id="end_date" name="end_date" required="required"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label class="form-label" for="rental_type">Type de location *</label>
+                                            <select class="form-select" id="rental_type" name="rental_type" required="required">
+                                                <option value="hour">À l'heure</option>
+                                                <option value="day" selected="selected">À la journée</option>
+                                                <option value="month">Au mois</option>
+                                            </select>
+                                        </div>
+
+                                        <!-- Affichage du prix calculé en temps réel -->
+                                        <div id="price_display" class="mt-3">
+                                            <div class="alert alert-info">
+                                                <i class="fa fa-info-circle"/> Sélectionnez un vélo et des dates pour voir le prix.
+                                            </div>
+                                        </div>
+
+                                        <div class="text-center mt-4">
+                                            <button type="submit" class="btn btn-success btn-lg">
+                                                <i class="fa fa-check"/> Valider la réservation
+                                            </button>
+                                        </div>
+                                        
+                                        
+                                    </form>
+
+                                    <!-- Script de calcul du prix -->
+                                        <script type="text/javascript">
+                                            (function() {
+                                                // Données des tarifs
+                                                var bikePrices = {
+                                                    <t t-foreach="bikes" t-as="bike">
+                                                        <t t-foreach="bike.product_variant_ids" t-as="variant">
+                                                            <t t-esc="variant.id"/>: {
+                                                                hour: <t t-esc="bike.rental_price_hour or 0"/>,
+                                                                day: <t t-esc="bike.rental_price_day or 0"/>,
+                                                                month: <t t-esc="bike.rental_price_month or 0"/>
+                                                            },
+                                                        </t>
+                                                    </t>
+                                                };
+                                                
+                                                function calculatePrice() {
+                                                    var bikeId = document.getElementById('bike_id').value;
+                                                    var startDateInput = document.getElementById('start_date').value;
+                                                    var endDateInput = document.getElementById('end_date').value;
+                                                    var rentalType = document.getElementById('rental_type').value;
+                                                    var priceDiv = document.getElementById('price_display');
+                                                    
+                                                    if (!bikeId || !startDateInput || !endDateInput) {
+                                                        priceDiv.innerHTML = '<div class="alert alert-info"><i class="fa fa-info-circle"></i> Sélectionnez un vélo et des dates valides</div>';
+                                                        return;
+                                                    }
+                                                    
+                                                    var startDate = new Date(startDateInput);
+                                                    var endDate = new Date(endDateInput);
+                                                    
+                                                    if (isNaN(startDate.getTime()) || isNaN(endDate.getTime()) || startDate >= endDate) {
+                                                        priceDiv.innerHTML = '<div class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Les dates ne sont pas valides</div>';
+                                                        return;
+                                                    }
+                                                    
+                                                    var duration = (endDate - startDate) / (1000 * 60 * 60 * 24);
+                                                    var prices = bikePrices[bikeId];
+                                                    
+                                                    if (!prices) {
+                                                        priceDiv.innerHTML = '<div class="alert alert-warning"><i class="fa fa-exclamation-triangle"></i> Vélo non trouvé</div>';
+                                                        return;
+                                                    }
+                                                    
+                                                    var unitPrice = prices[rentalType];
+                                                    var totalPrice = 0;
+                                                    var typeLabel = '';
+                                                    
+                                                    if (rentalType === 'hour') {
+                                                        totalPrice = unitPrice * (duration * 24);
+                                                        typeLabel = 'heure';
+                                                    } else if (rentalType === 'day') {
+                                                        totalPrice = unitPrice * duration;
+                                                        typeLabel = 'jour';
+                                                    } else if (rentalType === 'month') {
+                                                        totalPrice = unitPrice * (duration / 30);
+                                                        typeLabel = 'mois';
+                                                    }
+                                                    
+                                                    priceDiv.innerHTML = 
+                                                        '<div class="alert alert-success">' +
+                                                        '<h5><i class="fa fa-calculator"></i> Prix estimé</h5>' +
+                                                        '<p class="mb-1"><strong>Durée:</strong> ' + duration.toFixed(1) + ' jours</p>' +
+                                                        '<p class="mb-1"><strong>Tarif unitaire:</strong> ' + unitPrice.toFixed(2) + '€/' + typeLabel + '</p>' +
+                                                        '<h4 class="mb-0 mt-2"><strong>Prix total:</strong> <span class="text-success">' + totalPrice.toFixed(2) + ' €</span></h4>' +
+                                                        '</div>';
+                                                }
+                                                
+                                                // Attacher les événements
+                                                document.getElementById('bike_id').addEventListener('change', calculatePrice);
+                                                document.getElementById('start_date').addEventListener('change', calculatePrice);
+                                                document.getElementById('end_date').addEventListener('change', calculatePrice);
+                                                document.getElementById('rental_type').addEventListener('change', calculatePrice);
+                                            })();
+                                        </script>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </t>
+        </template>
+
+        <!-- ========== PAGE CONFIRMATION ========== -->
+        <template id="location_thanks" name="Confirmation de Location">
+            <t t-call="website.layout">
+                <t t-set="head">
+                    <link rel="stylesheet" type="text/css" href="/bike_shop/static/src/css/bike_shop.css"/>
+                </t>
+                
+                <div id="wrap" class="oe_structure">
+                    <section class="s_text_block pt48 pb48">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8 offset-lg-2 text-center">
+                                    <div class="alert alert-success p-5">
+                                        <i class="fa fa-check-circle fa-4x mb-4"/>
+                                        <h1 class="display-4">Réservation confirmée !</h1>
+                                        <p class="lead mt-3">
+                                            Votre demande de location a bien été enregistrée.
+                                        </p>
+                                        <div class="card mt-4 text-start">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Détails de votre location</h5>
+                                                <ul class="list-unstyled">
+                                                    <li><strong>Référence:</strong> <t t-esc="rental.reference"/></li>
+                                                    <li><strong>Vélo:</strong> <t t-esc="rental.bike_id.name"/></li>
+                                                    <li><strong>Début:</strong> <t t-esc="rental.start_date" t-options="{'widget': 'datetime'}"/></li>
+                                                    <li><strong>Fin:</strong> <t t-esc="rental.end_date" t-options="{'widget': 'datetime'}"/></li>
+                                                    <li><strong>Durée:</strong> <t t-esc="rental.duration_days"/> jours</li>
+                                                    <li><strong>Prix total:</strong> <t t-esc="rental.total_price" t-options="{'widget': 'monetary', 'display_currency': rental.bike_id.currency_id}"/></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <p class="mt-4">
+                                            Vous recevrez un email de confirmation à l'adresse: <strong><t t-esc="rental.partner_id.email"/></strong>
+                                        </p>
+                                        <div class="mt-4">
+                                            <a href="/" class="btn btn-primary me-2">Retour à l'accueil</a>
+                                            <a href="/shop" class="btn btn-outline-primary">Voir nos vélos</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </t>
+        </template>
+
+        <!-- ========== PERSONNALISATION DE LA PAGE SHOP ========== -->
+        
+        <!-- 1. Ajouter les infos de location sous chaque produit -->
+        <template id="products_item_inherit_bike_shop" inherit_id="website_sale.products_item" name="Bike Shop - Rental Info">
+            <!-- Ajouter les tarifs de location après le prix -->
+            <xpath expr="//div[hasclass('product_price')]" position="after">
+                <t t-if="product.rental_ok">
+                    <div class="mt-2 mb-2">
+                        <span class="badge bg-success">Location disponible</span>
+                    </div>
+                    <div class="text-muted small">
+                        <div><i class="fa fa-clock-o"/> <t t-esc="product.rental_price_hour"/>€/h</div>
+                        <div><i class="fa fa-calendar"/> <t t-esc="product.rental_price_day"/>€/jour</div>
+                        <div><i class="fa fa-calendar-check-o"/> <t t-esc="product.rental_price_month"/>€/mois</div>
+                    </div>
+                    <div class="mt-2">
+                        <a t-attf-href="/location?bike_id=#{product.id}" class="btn btn-sm btn-success">
+                            <i class="fa fa-bicycle"/> Louer ce vélo
+                        </a>
+                    </div>
+                </t>
+            </xpath>
+        </template>
+        
+        <!-- ========== PAGE SHOP FILTRÉE ========== -->
+        <template id="shop_filtered" name="Shop Filtré">
+            <t t-call="website.layout">
+                <t t-set="head">
+                    <link rel="stylesheet" type="text/css" href="/bike_shop/static/src/css/bike_shop.css"/>
+                </t>
+                
+                <div id="wrap" class="oe_structure">
+                    <section class="pt48 pb48">
+                        <div class="container">
+                            <!-- Titre avec icône -->
+                            <div class="text-center mb-5">
+                                <h1 class="display-4">
+                                    <i t-att-class="'fa ' + filter_icon"/> 
+                                    <t t-esc="filter_name"/>
+                                </h1>
+                                <p class="lead text-muted">
+                                    <t t-esc="len(products)"/> vélo<t t-if="len(products) > 1">s</t> trouvé<t t-if="len(products) > 1">s</t>
+                                </p>
+                                <div class="mt-3">
+                                    <a href="/shop" class="btn btn-outline-primary">
+                                        <i class="fa fa-arrow-left"/> Tous les vélos
+                                    </a>
+                                </div>
+                            </div>
+                            
+                            <!-- Filtres rapides -->
+                            <div class="row mb-4">
+                                <div class="col-lg-12">
+                                    <div class="btn-group" role="group">
+                                        <a href="/shop" class="btn btn-outline-secondary">Tous</a>
+                                        <a href="/shop/vtt" class="btn btn-outline-secondary">VTT</a>
+                                        <a href="/shop/route" class="btn btn-outline-secondary">Route</a>
+                                        <a href="/shop/ville" class="btn btn-outline-secondary">Ville</a>
+                                        <a href="/shop/electrique" class="btn btn-outline-secondary">Électrique</a>
+                                        <a href="/shop/location" class="btn btn-outline-success">Location</a>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Grille de produits -->
+                            <div class="row">
+                                <t t-if="len(products) == 0">
+                                    <div class="col-lg-12 text-center">
+                                        <div class="alert alert-info">
+                                            <i class="fa fa-info-circle fa-3x mb-3"/>
+                                            <h4>Aucun vélo trouvé</h4>
+                                            <p>Il n'y a pas de vélos disponibles dans cette catégorie pour le moment.</p>
+                                            <a href="/shop" class="btn btn-primary mt-3">Voir tous les vélos</a>
+                                        </div>
+                                    </div>
+                                </t>
+                                
+                                <t t-foreach="products" t-as="product">
+                                    <div class="col-lg-4 col-md-6 mb-4">
+                                        <div class="card h-100 shadow-sm">
+                                            <!-- Image du produit -->
+                                            <div class="card-img-top" style="height: 250px; background-color: #f8f9fa; display: flex; align-items: center; justify-content: center;">
+                                                <t t-if="product.image_1920">
+                                                    <img t-att-src="'data:image/png;base64,%s' % product.image_1920.decode('utf-8')" 
+                                                         class="img-fluid" 
+                                                         style="max-height: 100%; object-fit: contain;"
+                                                         t-att-alt="product.name"/>
+                                                </t>
+                                                <t t-else="">
+                                                    <i class="fa fa-bicycle fa-5x text-muted"/>
+                                                </t>
+                                            </div>
+                                            
+                                            <div class="card-body">
+                                                <h5 class="card-title"><t t-esc="product.name"/></h5>
+                                                
+                                                <!-- Badge type de vélo -->
+                                                <t t-if="product.bike_type">
+                                                    <span class="badge bg-secondary mb-2">
+                                                        <t t-if="product.bike_type == 'mountain'">VTT</t>
+                                                        <t t-if="product.bike_type == 'road'">Route</t>
+                                                        <t t-if="product.bike_type == 'city'">Ville</t>
+                                                        <t t-if="product.bike_type == 'electric'">Électrique</t>
+                                                    </span>
+                                                </t>
+                                                
+                                                <!-- Description -->
+                                                <p class="text-muted small">
+                                                    <t t-esc="product.description or 'Vélo de qualité'"/>
+                                                </p>
+                                                
+                                                <!-- Prix -->
+                                                <div class="mt-3 mb-3">
+                                                    <strong class="text-primary fs-4">
+                                                        <t t-esc="product.list_price" t-options="{'widget': 'monetary', 'display_currency': product.currency_id}"/>
+                                                    </strong>
+                                                </div>
+                                                
+                                                <!-- Infos location si disponible -->
+                                                <t t-if="product.rental_ok">
+                                                    <div class="mb-2">
+                                                        <span class="badge bg-success">Location disponible</span>
+                                                    </div>
+                                                    <div class="bg-light p-2 rounded mb-3">
+                                                        <small class="text-muted">
+                                                            <div><i class="fa fa-clock-o"/> <t t-esc="product.rental_price_hour"/>€/h</div>
+                                                            <div><i class="fa fa-calendar"/> <t t-esc="product.rental_price_day"/>€/jour</div>
+                                                            <div><i class="fa fa-calendar-check-o"/> <t t-esc="product.rental_price_month"/>€/mois</div>
+                                                        </small>
+                                                    </div>
+                                                </t>
+                                                
+                                                <!-- Boutons d'action -->
+                                                <div class="mt-3">
+                                                    <t t-if="product.sale_ok">
+                                                        <a t-attf-href="/shop/product/#{product.id}" class="btn btn-primary btn-sm me-2">
+                                                            <i class="fa fa-shopping-cart"/> Acheter
+                                                        </a>
+                                                    </t>
+                                                    <t t-if="product.rental_ok">
+                                                        <a t-attf-href="/location?bike_id=#{product.id}" class="btn btn-success btn-sm">
+                                                            <i class="fa fa-bicycle"/> Louer
+                                                        </a>
+                                                    </t>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </t>
+        </template>
+
+
+   <template id="shop_filters_dropdown" inherit_id="website_sale.products" name="Bike Shop - Filtres Dropdown">
+        <xpath expr="//h1" position="after">
+            <div class="d-flex justify-content-end align-items-center mb-3">
+                <label class="mb-0 me-2">Catégorie :</label>
+                <select class="form-select w-auto" onchange="window.location.href=this.value;">
+                    <option value="/shop">Tous</option>
+                    <option value="/shop/vtt">VTT</option>
+                    <option value="/shop/route">Route</option>
+                    <option value="/shop/ville">Ville</option>
+                    <option value="/shop/electrique">Électrique</option>
+                    <option value="/shop/location">Location</option>
+                </select>
+            </div>
+        </xpath>
+    </template>
+
+    <!-- ========== PAGE À PROPOS ========== -->
+        <template id="about_page" name="À Propos - Bike Shop">
+            <t t-call="website.layout">
+                <t t-set="head">
+                    <link rel="stylesheet" type="text/css" href="/bike_shop/static/src/css/bike_shop.css"/>
+                </t>
+                
+                <div id="wrap" class="oe_structure">
+                    
+                    <!-- Hero Section -->
+                    <section class="s_cover bg-primary pt96 pb96">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8 offset-lg-2 text-center text-white">
+                                    <h1 class="display-3">À Propos de Bike Shop</h1>
+                                    <p class="lead mt-3">
+                                        Votre partenaire de confiance pour la vente et la location de vélos depuis 2020
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Histoire du Magasin -->
+                    <!-- Déjà bon avec bg-primary -->
+                    <!-- Histoire du Magasin -->
+                    <section class="s_text_block pt48 pb48" style="background-color: #27ae60 !important;">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8 offset-lg-2">
+                                    <h2 class="display-4 text-center mb-5 text-white">Notre Histoire</h2>
+                                    <p class="lead text-center mb-4 text-white">
+                                        Une passion pour le vélo, un engagement pour la qualité
+                                    </p>
+                                    
+                                    <div class="card shadow-sm mb-4">
+                                        <div class="card-body p-5">
+                                            <p>
+                                                Fondé en 2020, Bike Shop est né de la passion de cyclistes enthousiastes 
+                                                souhaitant partager leur amour du vélo avec la communauté locale. Ce qui a 
+                                                commencé comme un petit atelier de réparation s'est rapidement transformé 
+                                                en un magasin complet offrant vente et location de vélos.
+                                            </p>
+                                            <p>
+                                                Notre mission est simple : rendre le cyclisme accessible à tous. Que vous 
+                                                soyez un cycliste chevronné ou que vous montiez sur un vélo pour la première 
+                                                fois, nous avons le vélo parfait pour vous.
+                                            </p>
+                                            <p class="mb-0">
+                                                Aujourd'hui, nous sommes fiers de servir des centaines de clients satisfaits 
+                                                et de contribuer à une mobilité plus durable dans notre ville.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Notre Équipe -->
+                    <section class="s_text_block pt48 pb48 bg-light">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 text-center mb-5">
+                                    <h2 class="display-4">Notre Équipe</h2>
+                                    <p class="lead text-muted">Des passionnés à votre service</p>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <!-- Membre 1 -->
+                                <div class="col-lg-4 mb-4">
+                                    <div class="card h-100 shadow-sm text-center">
+                                        <div class="card-body p-4">
+                                            <div class="mb-3">
+                                                <i class="fa fa-user-circle fa-5x text-primary"/>
+                                            </div>
+                                            <h4>Marc Dupont</h4>
+                                            <p class="text-muted">Fondateur &amp; Gérant</p>
+                                            <p class="small">
+                                                Cycliste passionné depuis 15 ans, Marc a transformé sa passion 
+                                                en entreprise pour partager l'amour du vélo avec tous.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Membre 2 -->
+                                <div class="col-lg-4 mb-4">
+                                    <div class="card h-100 shadow-sm text-center">
+                                        <div class="card-body p-4">
+                                            <div class="mb-3">
+                                                <i class="fa fa-user-circle fa-5x text-success"/>
+                                            </div>
+                                            <h4>Sophie Martin</h4>
+                                            <p class="text-muted">Responsable Location</p>
+                                            <p class="small">
+                                                Experte en conseil client, Sophie vous aide à trouver le vélo 
+                                                parfait pour vos besoins et votre budget.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Membre 3 -->
+                                <div class="col-lg-4 mb-4">
+                                    <div class="card h-100 shadow-sm text-center">
+                                        <div class="card-body p-4">
+                                            <div class="mb-3">
+                                                <i class="fa fa-user-circle fa-5x text-info"/>
+                                            </div>
+                                            <h4>Thomas Leroy</h4>
+                                            <p class="text-muted">Technicien Principal</p>
+                                            <p class="small">
+                                                Avec 10 ans d'expérience en mécanique vélo, Thomas assure 
+                                                l'entretien et la qualité de tous nos vélos.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Nos Valeurs -->
+                    <section class="s_text_block pt48 pb48">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-12 text-center mb-5">
+                                    <h2 class="display-4">Nos Valeurs</h2>
+                                    <p class="lead text-muted">Ce qui nous guide au quotidien</p>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <!-- Valeur 1 -->
+                                <div class="col-lg-4 mb-4">
+                                    <div class="text-center">
+                                        <div class="mb-3">
+                                            <i class="fa fa-heart fa-4x text-danger"/>
+                                        </div>
+                                        <h4>Passion</h4>
+                                        <p>
+                                            Le vélo est plus qu'un métier pour nous, c'est une passion que 
+                                            nous partageons avec enthousiasme avec chaque client.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Valeur 2 -->
+                                <div class="col-lg-4 mb-4">
+                                    <div class="text-center">
+                                        <div class="mb-3">
+                                            <i class="fa fa-check-circle fa-4x text-success"/>
+                                        </div>
+                                        <h4>Qualité</h4>
+                                        <p>
+                                            Nous sélectionnons rigoureusement nos vélos et assurons un 
+                                            entretien régulier pour garantir votre sécurité et confort.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Valeur 3 -->
+                                <div class="col-lg-4 mb-4">
+                                    <div class="text-center">
+                                        <div class="mb-3">
+                                            <i class="fa fa-leaf fa-4x text-success"/>
+                                        </div>
+                                        <h4>Durabilité</h4>
+                                        <p>
+                                            Nous croyons en une mobilité durable et encourageons l'utilisation 
+                                            du vélo pour un avenir plus vert.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Valeur 4 -->
+                                <div class="col-lg-4 mb-4">
+                                    <div class="text-center">
+                                        <div class="mb-3">
+                                            <i class="fa fa-users fa-4x text-primary"/>
+                                        </div>
+                                        <h4>Service Client</h4>
+                                        <p>
+                                            Votre satisfaction est notre priorité. Nous sommes toujours là 
+                                            pour vous conseiller et vous accompagner.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Valeur 5 -->
+                                <div class="col-lg-4 mb-4">
+                                    <div class="text-center">
+                                        <div class="mb-3">
+                                            <i class="fa fa-dollar fa-4x text-warning"/>
+                                        </div>
+                                        <h4>Prix Justes</h4>
+                                        <p>
+                                            Nous proposons des tarifs compétitifs et transparents, sans 
+                                            compromis sur la qualité.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <!-- Valeur 6 -->
+                                <div class="col-lg-4 mb-4">
+                                    <div class="text-center">
+                                        <div class="mb-3">
+                                            <i class="fa fa-graduation-cap fa-4x text-info"/>
+                                        </div>
+                                        <h4>Expertise</h4>
+                                        <p>
+                                            Notre équipe possède une connaissance approfondie du cyclisme 
+                                            et vous guide vers le meilleur choix.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Call to Action -->
+                    <section class="s_text_block pt48 pb48 bg-primary text-white">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-lg-8 offset-lg-2 text-center">
+                                    <h2 class="display-4">Prêt à Rouler ?</h2>
+                                    <p class="lead mt-3 mb-4">
+                                        Visitez notre magasin ou parcourez notre catalogue en ligne
+                                    </p>
+                                    <div class="mt-4">
+                                        <a href="/shop" class="btn btn-light btn-lg me-2">
+                                            <i class="fa fa-shopping-cart"/> Voir nos vélos
+                                        </a>
+                                        <a href="/location" class="btn btn-outline-light btn-lg">
+                                            <i class="fa fa-bicycle"/> Louer un vélo
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </t>
+        </template>
+
+    </data>
+</odoo>

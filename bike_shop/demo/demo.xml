@@ -1,0 +1,148 @@
+<odoo>
+    <data>
+        <!-- Catégorie de produits pour les vélos -->
+        <record id="product_category_bikes" model="product.category">
+            <field name="name">Vélos</field>
+        </record>
+
+        <!-- VTT RockRider 540 -->
+        <record id="bike_demo_1" model="product.template">
+            <field name="name">VTT RockRider 540</field>
+            <field name="categ_id" ref="product_category_bikes"/>
+            <field name="list_price">450.00</field>
+            <field name="standard_price">300.00</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">True</field>
+            <field name="rental_ok">True</field>
+            <field name="bike_type">mountain</field>
+            <field name="rental_price_hour">8.00</field>
+            <field name="rental_price_day">35.00</field>
+            <field name="rental_price_month">280.00</field>
+            <field name="description">
+                VTT robuste parfait pour les sentiers. 
+                Cadre aluminium, suspension avant, 21 vitesses.
+            </field>
+            <field name="description_sale">
+                Disponible à la vente et à la location !
+                - Location: 8€/h, 35€/jour, 280€/mois
+                - Idéal pour les trails et chemins forestiers
+            </field>
+        </record>
+
+        <!-- Vélo de route Triban RC 520 -->
+        <record id="bike_demo_2" model="product.template">
+            <field name="name">Vélo de Route Triban RC 520</field>
+            <field name="categ_id" ref="product_category_bikes"/>
+            <field name="list_price">750.00</field>
+            <field name="standard_price">500.00</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">True</field>
+            <field name="rental_ok">True</field>
+            <field name="bike_type">road</field>
+            <field name="rental_price_hour">10.00</field>
+            <field name="rental_price_day">45.00</field>
+            <field name="rental_price_month">350.00</field>
+            <field name="description">
+                Vélo de route performant pour les longues distances.
+                Cadre alu, groupe Shimano, pneus 700x25c.
+            </field>
+            <field name="description_sale">
+                Disponible à la vente et à la location !
+                - Location: 10€/h, 45€/jour, 350€/mois
+                - Parfait pour les sorties sur route
+            </field>
+        </record>
+
+        <!-- Vélo de ville Elops 520 -->
+        <record id="bike_demo_3" model="product.template">
+            <field name="name">Vélo de Ville Elops 520</field>
+            <field name="categ_id" ref="product_category_bikes"/>
+            <field name="list_price">280.00</field>
+            <field name="standard_price">180.00</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">True</field>
+            <field name="rental_ok">True</field>
+            <field name="bike_type">city</field>
+            <field name="rental_price_hour">5.00</field>
+            <field name="rental_price_day">20.00</field>
+            <field name="rental_price_month">150.00</field>
+            <field name="description">
+                Vélo urbain confortable pour vos déplacements quotidiens.
+                Porte-bagages, garde-boue, éclairage inclus.
+            </field>
+            <field name="description_sale">
+                Disponible à la vente et à la location !
+                - Location: 5€/h, 20€/jour, 150€/mois
+                - Idéal pour la ville
+            </field>
+        </record>
+
+        <!-- Vélo électrique Riverside 500E -->
+        <record id="bike_demo_4" model="product.template">
+            <field name="name">Vélo Électrique Riverside 500E</field>
+            <field name="categ_id" ref="product_category_bikes"/>
+            <field name="list_price">1500.00</field>
+            <field name="standard_price">1000.00</field>
+            <field name="sale_ok">True</field>
+            <field name="purchase_ok">True</field>
+            <field name="rental_ok">True</field>
+            <field name="bike_type">electric</field>
+            <field name="rental_price_hour">15.00</field>
+            <field name="rental_price_day">60.00</field>
+            <field name="rental_price_month">480.00</field>
+            <field name="description">
+                Vélo électrique haut de gamme avec assistance 90km.
+                Moteur Bosch, batterie 500Wh, écran LCD.
+            </field>
+            <field name="description_sale">
+                Disponible à la vente et à la location !
+                - Location: 15€/h, 60€/jour, 480€/mois
+                - Autonomie jusqu'à 90km
+            </field>
+        </record>
+
+        <!-- VTT location uniquement -->
+        <record id="bike_demo_5" model="product.template">
+            <field name="name">VTT Premium Stilus E-AM 9.9</field>
+            <field name="categ_id" ref="product_category_bikes"/>
+            <field name="list_price">0.00</field>
+            <field name="standard_price">800.00</field>
+            <field name="sale_ok">False</field>
+            <field name="purchase_ok">False</field>
+            <field name="rental_ok">True</field>
+            <field name="bike_type">mountain</field>
+            <field name="rental_price_hour">12.00</field>
+            <field name="rental_price_day">50.00</field>
+            <field name="rental_price_month">400.00</field>
+            <field name="description">
+                VTT électrique haut de gamme - LOCATION UNIQUEMENT.
+                Suspension complète, moteur Yamaha, batterie longue durée.
+            </field>
+            <field name="description_sale">
+                LOCATION UNIQUEMENT !
+                - Location: 12€/h, 50€/jour, 400€/mois
+                - VTT électrique premium pour les trails exigeants
+            </field>
+        </record>
+
+        <!-- Accessoires -->
+        <record id="accessory_helmet" model="product.template">
+            <field name="name">Casque de Vélo Pro</field>
+            <field name="categ_id" ref="product_category_bikes"/>
+            <field name="list_price">45.00</field>
+            <field name="standard_price">25.00</field>
+            <field name="sale_ok">True</field>
+            <field name="description">Casque léger et aéré, homologué CE</field>
+        </record>
+
+        <record id="accessory_lock" model="product.template">
+            <field name="name">Antivol U haute sécurité</field>
+            <field name="categ_id" ref="product_category_bikes"/>
+            <field name="list_price">35.00</field>
+            <field name="standard_price">20.00</field>
+            <field name="sale_ok">True</field>
+            <field name="description">Antivol en acier trempé avec support</field>
+        </record>
+
+    </data>
+</odoo>

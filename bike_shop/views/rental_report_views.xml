@@ -1,0 +1,43 @@
+<odoo>
+  <data>
+    <!-- Vue pivot pour le reporting des locations -->
+    <record id="view_rental_pivot" model="ir.ui.view">
+      <field name="name">rental.pivot</field>
+      <field name="model">bike.shop.rental</field>
+      <field name="arch" type="xml">
+        <pivot string="Analyse des Locations">
+          <field name="bike_id" type="row"/>
+          <field name="rental_type" type="col"/>
+          <field name="total_price" type="measure"/>
+          <field name="duration_days" type="measure"/>
+        </pivot>
+      </field>
+    </record>
+
+    <!-- Vue graphique pour les revenus -->
+    <record id="view_rental_graph" model="ir.ui.view">
+      <field name="name">rental.graph</field>
+      <field name="model">bike.shop.rental</field>
+      <field name="arch" type="xml">
+        <graph string="Revenus des Locations" type="bar">
+          <field name="bike_id"/>
+          <field name="total_price" type="measure"/>
+        </graph>
+      </field>
+    </record>
+
+    <!-- Action pour le reporting -->
+    <record id="action_rental_reporting" model="ir.actions.act_window">
+      <field name="name">Analyse des Locations</field>
+      <field name="res_model">bike.shop.rental</field>
+      <field name="view_mode">graph,pivot,list</field>
+    </record>
+
+    <!-- Menu Reporting -->
+    <menuitem id="bike_shop.menu_reporting" name="Reporting" parent="bike_shop.menu_root" sequence="30"/>
+    
+    <menuitem id="bike_shop.menu_rental_reporting" name="Analyse des Locations" 
+              parent="bike_shop.menu_reporting" action="action_rental_reporting" sequence="10"/>
+
+  </data>
+</odoo>

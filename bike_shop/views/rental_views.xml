@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <!-- Menu principal Bike Shop -->
+    <menuitem name="Bike Shop" id="bike_shop.menu_root" sequence="10"/>
+    
+    <!-- Vue liste des locations avec filtres -->
+    <record model="ir.ui.view" id="bike_shop.rental_list">
+      <field name="name">Rental list</field>
+      <field name="model">bike.shop.rental</field>
+      <field name="arch" type="xml">
+        <list string="Locations">
+          <field name="reference"/>
+          <field name="partner_id"/>
+          <field name="bike_id"/>
+          <field name="start_date"/>
+          <field name="end_date"/>
+          <field name="duration_days"/>
+          <field name="total_price"/>
+          <field name="state" decoration-success="state == 'returned'" 
+                 decoration-info="state == 'ongoing'" 
+                 decoration-warning="state == 'confirmed'"
+                 widget="badge"/>
+          <field name="invoice_status" invisible="1"/>
+        </list>
+      </field>
+    </record>
+
+    <!-- Vue formulaire des locations avec boutons -->
+    <record model="ir.ui.view" id="bike_shop.rental_form">
+      <field name="name">Rental form</field>
+      <field name="model">bike.shop.rental</field>
+      <field name="arch" type="xml">
+        <form>
+          <header>
+            <!-- Boutons d'action -->
+            <button name="action_confirm" string="Confirmer" type="object" 
+                    class="oe_highlight" invisible="state != 'draft'"/>
+            <button name="action_start" string="Démarrer location" type="object" 
+                    class="oe_highlight" invisible="state != 'confirmed'"/>
+            <button name="action_return" string="Retourner vélo" type="object" 
+                    class="oe_highlight" invisible="state != 'ongoing'"/>
+            <button name="action_cancel" string="Annuler" type="object" 
+                    invisible="state in ['returned', 'cancelled']"/>
+            
+            <!-- Bouton Créer facture -->
+            <button name="action_create_invoice" string="Créer facture" type="object" 
+                    class="btn-primary" invisible="invoice_id or state == 'draft'"/>
+            
+            <!-- Bouton Voir facture -->
+            <button name="action_view_invoice" string="Voir facture" type="object" 
+                    class="btn-secondary" invisible="not invoice_id"/>
+            
+            <!-- Barre de statut -->
+            <field name="state" widget="statusbar" statusbar_visible="draft,confirmed,ongoing,returned"/>
+          </header>
+          <sheet>
+            <div class="oe_button_box" name="button_box">
+              <!-- Smart button pour la facture -->
+              <button name="action_view_invoice" type="object" 
+                      class="oe_stat_button" icon="fa-file-text-o"
+                      invisible="not invoice_id">
+                <field name="invoice_status" widget="label"/>
+              </button>
+            </div>
+            
+            <group>
+              <group>
+                <field name="reference"/>
+                <field name="partner_id"/>
+                <field name="bike_id"/>
+              </group>
+              <group>
+                <field name="rental_type"/>
+                <field name="unit_price"/>
+                <field name="invoice_id" invisible="1"/>
+              </group>
+            </group>
+            <group string="Période de location">
+              <group>
+                <field name="start_date"/>
+                <field name="end_date"/>
+              </group>
+              <group>
+                <field name="duration_days"/>
+                <field name="total_price"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <!-- Vue recherche avec filtres -->
+    <record id="bike_shop.rental_search" model="ir.ui.view">
+      <field name="name">Rental search</field>
+      <field name="model">bike.shop.rental</field>
+      <field name="arch" type="xml">
+        <search string="Rechercher locations">
+          <field name="reference"/>
+          <field name="partner_id"/>
+          <field name="bike_id"/>
+          
+          <!-- Filtres prédéfinis -->
+          <filter string="Brouillon" name="filter_draft" domain="[('state', '=', 'draft')]"/>
+          <filter string="En cours" name="filter_ongoing" domain="[('state', '=', 'ongoing')]"/>
+          <filter string="Retournées" name="filter_returned" domain="[('state', '=', 'returned')]"/>
+          <filter string="À facturer" name="filter_to_invoice" domain="[('invoice_status', '=', 'to_invoice')]"/>
+          
+          <separator/>
+          
+          <!-- Groupements -->
+          <filter string="État" name="group_by_state" context="{'group_by': 'state'}"/>
+          <filter string="Vélo" name="group_by_bike" context="{'group_by': 'bike_id'}"/>
+          <filter string="Client" name="group_by_partner" context="{'group_by': 'partner_id'}"/>
+        </search>
+      </field>
+    </record>
+
+    <!-- Action window pour locations -->
+    <record model="ir.actions.act_window" id="bike_shop.action_rentals">
+      <field name="name">Locations</field>
+      <field name="res_model">bike.shop.rental</field>
+      <field name="view_mode">list,form</field>
+      <field name="context">{'search_default_filter_ongoing': 1}</field>
+    </record>
+
+    <!-- Menu Locations -->
+    <menuitem name="Locations" id="bike_shop.menu_rentals" parent="bike_shop.menu_root"
+              action="bike_shop.action_rentals" sequence="20"/>
+
+  </data>
+</odoo>

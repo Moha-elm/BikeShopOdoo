@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    
+    <!-- Ajouter nos champs au formulaire produit -->
+    <record id="product_template_form_view_rental" model="ir.ui.view">
+        <field name="name">product.template.form.rental</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            
+            <!-- Ajouter checkbox à côté de Can be Sold -->
+            <field name="sale_ok" position="after">
+                <field name="rental_ok" string="Disponible à la location"/>
+            </field>
+            
+            <!-- Ajouter nos champs dans un nouveau notebook page -->
+            <xpath expr="//notebook" position="inside">
+                <page string="Location" name="rental_info" invisible="rental_ok == False">
+                    <group>
+                        <group string="Informations Vélo">
+                            <field name="bike_type"/>
+                        </group>
+                    </group>
+                    <group string="Tarifs de Location">
+                        <group>
+                            <field name="rental_price_hour"/>
+                            <field name="rental_price_day"/>
+                        </group>
+                        <group>
+                            <field name="rental_price_month"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+            
+        </field>
+    </record>
+    
+    </data>
+</odoo>

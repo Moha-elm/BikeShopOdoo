@@ -1,0 +1,399 @@
+/* ========================================
+   BIKE SHOP - CUSTOM STYLES (VERSION VERTE)
+   ======================================== */
+
+/* Variables de couleurs - TOUT EN VERT! */
+:root {
+    --bike-primary: #27ae60;      /* Vert principal */
+    --bike-secondary: #229954;    /* Vert foncé */
+    --bike-accent: #2ecc71;       /* Vert clair/accent */
+    --bike-light: #ecf0f1;        /* Gris clair */
+    --bike-dark: #1e8449;         /* Vert très foncé */
+}
+
+/* Hero Section */
+.s_cover {
+    min-height: 500px;
+}
+
+.s_cover h1 {
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.s_cover h2 {
+    font-weight: 300;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+/* Cards améliorées */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(39, 174, 96, 0.3) !important;
+}
+
+.card-title {
+    color: var(--bike-primary);
+    font-weight: 600;
+}
+
+/* Boutons personnalisés - TOUS VERTS */
+.btn-primary {
+    background-color: var(--bike-primary) !important;
+    border-color: var(--bike-primary) !important;
+    padding: 12px 30px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: var(--bike-secondary) !important;
+    border-color: var(--bike-secondary) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(39, 174, 96, 0.4);
+}
+
+.btn-success {
+    background-color: var(--bike-accent) !important;
+    border-color: var(--bike-accent) !important;
+    padding: 12px 30px;
+    font-weight: 500;
+}
+
+.btn-success:hover {
+    background-color: var(--bike-primary) !important;
+    border-color: var(--bike-primary) !important;
+    transform: translateY(-2px);
+}
+
+/* Boutons secondaires en vert aussi */
+.btn-secondary {
+    background-color: #95a5a6 !important;
+    border-color: #95a5a6 !important;
+}
+
+.btn-secondary:hover {
+    background-color: var(--bike-primary) !important;
+    border-color: var(--bike-primary) !important;
+}
+
+/* Boutons outline */
+.btn-outline-primary {
+    color: var(--bike-primary) !important;
+    border-color: var(--bike-primary) !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--bike-primary) !important;
+    border-color: var(--bike-primary) !important;
+    color: white !important;
+}
+
+/* Formulaire de location */
+.form-control, .form-select {
+    border-radius: 8px;
+    border: 2px solid #e0e0e0;
+    padding: 12px;
+    transition: border-color 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--bike-primary) !important;
+    box-shadow: 0 0 0 0.2rem rgba(39, 174, 96, 0.25) !important;
+}
+
+.form-label {
+    font-weight: 600;
+    color: var(--bike-dark);
+    margin-bottom: 8px;
+}
+
+/* Alert personnalisé */
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    border-radius: 12px;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    border-radius: 8px;
+}
+
+/* Icons */
+.fa-shopping-cart, .fa-bicycle {
+    color: var(--bike-primary);
+}
+
+/* Sections */
+section {
+    position: relative;
+}
+
+.bg-light {
+    background-color: #f8f9fa !important;
+}
+
+/* Backgrounds verts */
+.bg-primary {
+    background-color: var(--bike-primary) !important;
+}
+
+.s_cover.bg-primary, 
+section.bg-primary {
+    background-color: var(--bike-primary) !important;
+}
+
+/* Prix et textes importants */
+.text-primary {
+    color: var(--bike-primary) !important;
+}
+
+.text-success {
+    color: var(--bike-accent) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .s_cover h1 {
+        font-size: 2.5rem;
+    }
+    
+    .s_cover h2 {
+        font-size: 1.5rem;
+    }
+    
+    .card {
+        margin-bottom: 20px;
+    }
+}
+
+/* Animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* Badge Location disponible - VERT */
+.badge-rental, .badge.bg-success {
+    background-color: var(--bike-primary) !important;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+/* Amélioration du footer */
+footer {
+    background-color: var(--bike-dark);
+    color: white;
+}
+
+footer a {
+    color: #ecf0f1;
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--bike-accent);
+}
+
+/* Personnalisation de la page Shop */
+.oe_product_cart .product_price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--bike-primary);
+}
+
+/* Style des infos de location */
+.product_price + div .text-muted.small {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.product_price + div .text-muted.small div {
+    margin-bottom: 5px;
+}
+
+/* Cards des filtres */
+.card-header h6 {
+    color: var(--bike-primary);
+    font-weight: 600;
+}
+
+.card-body ul li {
+    margin-bottom: 8px;
+}
+
+.card-body ul li a {
+    color: #495057;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.card-body ul li a:hover {
+    color: var(--bike-primary);
+}
+
+/* Liens généraux */
+a {
+    color: var(--bike-primary);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--bike-secondary);
+}
+
+/* Icônes colorées pour la page About */
+.fa-heart {
+    color: var(--bike-primary) !important;
+}
+
+.fa-check-circle {
+    color: var(--bike-accent) !important;
+}
+
+.fa-leaf {
+    color: var(--bike-primary) !important;
+}
+
+.fa-users {
+    color: var(--bike-primary) !important;
+}
+
+.fa-dollar {
+    color: var(--bike-accent) !important;
+}
+
+.fa-graduation-cap {
+    color: var(--bike-primary) !important;
+}
+
+.fa-user-circle.text-primary {
+    color: var(--bike-primary) !important;
+}
+
+.fa-user-circle.text-success {
+    color: var(--bike-accent) !important;
+}
+
+.fa-user-circle.text-info {
+    color: var(--bike-primary) !important;
+}
+
+/* Headers verts */
+h1, h2, h3, h4, h5, h6 {
+    color: var(--bike-dark);
+}
+
+/* Navbar (si tu veux que le menu soit vert aussi) */
+.navbar {
+    background-color: white !important;
+}
+
+/* Menu hover effect */
+.navbar-nav .nav-link:hover {
+    color: var(--bike-primary) !important;
+}
+
+/* Bouton "Contactez-nous" dans le header */
+.btn-lg {
+    padding: 12px 30px !important;
+}
+
+/* FORCER LES BACKGROUNDS VERTS - PRIORITÉ MAXIMALE */
+
+/* Hero Homepage - VERT FONCÉ */
+.s_cover.bg-black-50,
+.s_cover.parallax {
+    background-color: var(--bike-dark) !important;
+}
+
+.s_cover .o_we_bg_filter {
+    background-color: rgba(30, 132, 73, 0.7) !important; /* Vert foncé avec transparence */
+}
+
+/* Hero About et autres sections primary - VERT */
+section.s_cover.bg-primary,
+section.bg-primary {
+    background-color: var(--bike-primary) !important;
+}
+
+/* Bouton "Contactez-nous" en haut à droite - VERT */
+.btn.btn-primary,
+a.btn-primary {
+    background-color: var(--bike-primary) !important;
+    border-color: var(--bike-primary) !important;
+}
+
+/* Background de la section "Notre Histoire" */
+.s_text_block.bg-primary {
+    background-color: var(--bike-primary) !important;
+}
+
+/* ========================================
+   FORCER TOUT EN VERT - PRIORITÉ MAXIMALE
+   ======================================== */
+
+/* Tous les backgrounds primary = VERT */
+.bg-primary,
+.s_cover.bg-primary,
+section.bg-primary,
+.s_text_block.bg-primary {
+    background-color: var(--bike-primary) !important;
+}
+
+/* Hero avec fond sombre = VERT FONCÉ */
+.s_cover.bg-black-50,
+.s_cover.bg-dark {
+    background-color: var(--bike-dark) !important;
+}
+
+/* Filtres de couleur sur les images = VERT */
+.o_we_bg_filter.bg-black-50,
+.o_we_bg_filter {
+    background-color: rgba(30, 132, 73, 0.6) !important;
+}
+
+/* Boutons du header */
+.navbar .btn,
+.navbar .btn-primary,
+header .btn-primary {
+    background-color: var(--bike-dark) !important;
+    border-color: var(--bike-dark) !important;
+}
+
+/* Surcharge totale des couleurs bleues/mauves d'Odoo */
+.btn-info,
+.bg-info,
+.text-info {
+    background-color: var(--bike-primary) !important;
+    color: white !important;
+}
+
+/* Bannières et sections colorées */
+.alert-primary {
+    background-color: rgba(39, 174, 96, 0.1) !important;
+    border-color: var(--bike-primary) !important;
+    color: var(--bike-dark) !important;
+}
